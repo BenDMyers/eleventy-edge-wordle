@@ -1,0 +1,16 @@
+{
+	"name": "eleventy-edge-wordle",
+	"version": "1.0.0",
+	"description": "",
+	"main": ".eleventy.js",
+	"scripts": {
+		"build": "eleventy",
+		"dev": "eleventy --serve"
+	},
+	"keywords": [],
+	"author": "Ben Myers <ben@benmyers.dev>",
+	"license": "ISC",
+	"dependencies": {
+		"@11ty/eleventy": "^1.0.1"
+	}
+}
