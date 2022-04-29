@@ -1,0 +1,15 @@
+[dev]
+framework = "#static"
+command = "npx @11ty/eleventy --quiet --watch"
+
+[build]
+command = "npx @11ty/eleventy"
+publish = "_site"
+
+[[edge_functions]]
+function = "eleventy-edge"
+path = "/*"
+
+[[edge_functions]]
+function = "guess"
+path = "/"

@@ -11,6 +11,7 @@
 	"author": "Ben Myers <ben@benmyers.dev>",
 	"license": "ISC",
 	"dependencies": {
-		"@11ty/eleventy": "^1.0.1"
+		"@11ty/eleventy": "^2.0.0-canary.8",
+		"netlify-cli": "^10.1.0"
 	}
 }

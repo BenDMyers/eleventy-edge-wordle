@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Eleventy Edge Wordle</title>
+	<link rel="stylesheet" href="https://cdn.rawgit.com/kimeiga/bahunya/css/bahunya-0.1.3.css" />
+</head>
+<body>
+	<main>
+		<h1>Eleventy Edge Wordle</h1>
+
+		{% edge %}
+		{{ eleventy.edge.cookies.guesses | table }}
+		<form action="{{ page.url }}" method="post">
+			<label for="guess">Guess a word:</label>
+			<input
+				type="text"
+				id="guess"
+				name="guess"
+				minlength="5"
+				maxlength="5"
+				required
+				autofocus
+			/>
+			<button type="submit">Guess</button>
+		</form>
+		{% endedge %}
+
+		<p hidden id="wrong-desc">Not in word</p>
+		<p hidden id="out-of-place-desc">In the wrong place</p>
+		<p hidden id="correct-desc">Correct</p>
+
+		<style>
+			h1 {
+				font-size: 300%;
+				text-align: center;
+			}
+
+			table {
+				min-width: 30ch;
+				margin: auto;
+				margin-bottom: 2em;
+			}
+
+			td {
+				text-transform: uppercase;
+				aspect-ratio: 1 / 1;
+				width: 4rem;
+				height: 4rem;
+				text-align: center;
+				font-weight: bold;
+				font-size: 150%;
+			}
+
+			[data-status="correct"] {
+				background-color: olivedrab;
+			}
+
+			[data-status="out-of-place"] {
+				background-color: goldenrod;
+			}
+
+			[data-row-status~="last"] {
+				animation: fadeIn 2s;
+			}
+
+			@keyframes fadeIn {
+				0% {opacity:0;}
+				100% {opacity:1;}
+			}
+		</style>
+	</main>
+</body>
+</html>
