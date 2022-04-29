@@ -59,10 +59,10 @@ function validateWordleGuess(solution, guess) {
  * @param {string} guessCookie pipe-delimited list of guesses
  * @returns {string} table HTML
  */
-export default function formatGuessesAsTable(guessCookie = '') {
+export default function formatGuessesAsTable(guessCookie = '', solution = '') {
 	const guesses = guessCookie.split('|');
 	const rows = guesses.map((guess, index) => {
-		const validation = validateWordleGuess('green', guess);
+		const validation = validateWordleGuess(solution, guess);
 		const cells = validation.map(({letter, state}) => `<td data-status="${state}" aria-describedby="${state}-desc">${letter}</td>`);
 		const isLast = index === guesses.length - 1;
 		const row = `<tr data-row-status="guessed ${isLast ? 'last' : ''}" aria-label="Guess ${index + 1}: ${guess}">${cells.join('')}</tr>`;

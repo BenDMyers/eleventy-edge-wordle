@@ -12,7 +12,17 @@
 		<h1>Eleventy Edge Wordle</h1>
 
 		{% edge %}
-		{{ eleventy.edge.cookies.guesses | table }}
+		{{ eleventy.edge.cookies.guesses | table: eleventy.edge.cookies.solution }}
+		
+		{% if eleventy.edge.cookies.state == "win" %}
+		<p>
+			<mark>Congrats!</mark>
+		</p>
+		{% elsif eleventy.edge.cookies.state == "loss" %}
+		<p>
+			<mark>Try again tomorrow!</mark>
+		</p>
+		{% else %}
 		<form action="{{ page.url }}" method="post">
 			<label for="guess">Guess a word:</label>
 			<input
@@ -28,6 +38,7 @@
 			/>
 			<button type="submit">Guess</button>
 		</form>
+		{% endif %}
 		{% endedge %}
 
 		<p hidden id="wrong-desc">Not in word</p>
@@ -41,7 +52,7 @@
 			}
 
 			table {
-				min-width: 30ch;
+				min-width: 40ch;
 				margin: auto;
 				margin-bottom: 2em;
 			}
@@ -75,6 +86,17 @@
 			
 			[type="text"] {
 				text-transform: uppercase;
+			}
+
+			table + p {
+				text-align: center;
+			}
+
+			mark {
+				font-style: italic;
+				font-weight: bold;
+				font-size: 125%;
+				padding: 0.6% 0.9%;
 			}
 		</style>
 	</main>

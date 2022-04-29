@@ -12,6 +12,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"@11ty/eleventy": "^2.0.0-canary.8",
-		"netlify-cli": "^10.1.0"
+		"netlify-cli": "^10.1.0",
+		"wordlist-english": "^1.2.1"
 	}
 }
