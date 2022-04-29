@@ -75,8 +75,47 @@ export default function formatGuessesAsTable(guessCookie = '', solution = '') {
 
 	return `
 		<table>
+			<caption class="visually-hidden">Guesses</caption>
 			<tbody>
 				${rows.join('')}
+			</tbody>
+		</table>
+	`;
+}
+
+const KEY_ORDER = [
+	['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+	['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+	['z', 'x', 'c', 'v', 'b', 'n', 'm']
+];
+
+export function formatUsedKeys(guessCookie = '', solution = '') {
+	const validatedLetters = guessCookie
+		.split('|')
+		.map(guess => validateWordleGuess(solution, guess))
+		.flat();
+
+	const keyboardRows = KEY_ORDER.map(keyboardRow => {
+		const keys = keyboardRow.map(key => {
+			let letterStatus = 'unguessed';
+			if (validatedLetters.find(valid => (valid.letter === key && valid.state === 'correct'))) {
+				letterStatus = 'correct';
+			} else if (validatedLetters.find(valid => (valid.letter === key && valid.state === 'out-of-place'))) {
+				letterStatus = 'out-of-place';
+			} else if (validatedLetters.find(valid => (valid.letter === key && valid.state === 'wrong'))) {
+				letterStatus = 'wrong';
+			}
+
+			return `<td data-status="${letterStatus}" aria-describedby="${letterStatus}-desc">${key}</td>`;
+		});
+		return `<tr>${keys.join('')}</tr>`;
+	});
+
+	return `
+		<table class="keyboard">
+			<caption class="visually-hidden">Used Keys</caption>
+			<tbody>
+				${keyboardRows.join('')}
 			</tbody>
 		</table>
 	`;

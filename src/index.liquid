@@ -39,15 +39,21 @@
 			<button type="submit">Guess</button>
 		</form>
 		{% endif %}
+		{{ eleventy.edge.cookies.guesses | usedKeys: eleventy.edge.cookies.solution }}
 		{% endedge %}
 
 		<p hidden id="wrong-desc">Not in word</p>
 		<p hidden id="out-of-place-desc">In the wrong place</p>
 		<p hidden id="correct-desc">Correct</p>
+		<p hidden id="unguessed-desc">Not guessed yet</p>
 
 		<style>
 			h1 {
 				font-size: 300%;
+				text-align: center;
+			}
+
+			form {
 				text-align: center;
 			}
 
@@ -57,15 +63,28 @@
 				margin-bottom: 2em;
 			}
 
+			table.keyboard {
+				text-align: center;
+			}
+
 			td {
 				text-transform: uppercase;
-				aspect-ratio: 1 / 1;
-				width: 4rem;
-				height: 4rem;
 				text-align: center;
 				font-weight: bold;
 				font-size: 150%;
 				position: relative;
+			}
+
+			table.keyboard td {
+				display: inline-block;
+				margin-right: 0.2em;
+				margin-bottom: 0.1em;
+				border: none;
+			}
+
+			table.keyboard {
+				transform: scale(0.75);
+				width: max-content;
 			}
 
 			[data-status="correct"] {
@@ -96,6 +115,10 @@
 				animation: fadeIn 2s;
 			}
 
+			[data-status="unguessed"] {
+				background-color: #696969;
+			}
+
 			@keyframes fadeIn {
 				0% {opacity:0;}
 				100% {opacity:1;}
@@ -114,6 +137,20 @@
 				font-weight: bold;
 				font-size: 125%;
 				padding: 0.6% 0.9%;
+			}
+
+			.visually-hidden {
+				border: 0 !important;
+				clip: rect(1px, 1px, 1px, 1px) !important;
+				-webkit-clip-path: inset(50%) !important;
+				clip-path: inset(50%) !important;
+				height: 1px !important;
+				overflow: hidden !important;
+				margin: -1px !important;
+				padding: 0 !important;
+				position: absolute !important;
+				width: 1px !important;
+				white-space: nowrap !important;
 			}
 		</style>
 	</main>

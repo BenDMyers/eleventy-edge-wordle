@@ -1,6 +1,6 @@
 import {EleventyEdge} from 'eleventy:edge';
 import precompiledAppData from './_generated/eleventy-edge-app-data.js';
-import formatGuessesAsTable from '../../src/_11ty/table.js';
+import formatGuessesAsTable, {formatUsedKeys} from '../../src/_11ty/table.js';
 import getTodaysSolution from './_solution/solution.js';
 
 export default async (request, context) => {
@@ -26,6 +26,7 @@ export default async (request, context) => {
 
 		edge.config((eleventyConfig) => {
 			eleventyConfig.addFilter('table', formatGuessesAsTable);
+			eleventyConfig.addFilter('usedKeys', formatUsedKeys);
 		});
 
 		return await edge.handleResponse();
