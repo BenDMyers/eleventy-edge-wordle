@@ -65,14 +65,31 @@
 				text-align: center;
 				font-weight: bold;
 				font-size: 150%;
+				position: relative;
 			}
 
 			[data-status="correct"] {
 				background-color: olivedrab;
 			}
 
+			[data-status]::before {
+				position: absolute;
+				top: 0;
+				right: 0.25em;
+				margin-top: -0.15em;
+				font-size: 75%;
+			}
+
+			[data-status="correct"]::before {
+				content: '✓';
+			}
+
 			[data-status="out-of-place"] {
-				background-color: goldenrod;
+				background-color: #A98019;
+			}
+
+			[data-status="out-of-place"]::before {
+				content: '◑';
 			}
 
 			[data-row-status~="last"] {
