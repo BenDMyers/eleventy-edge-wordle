@@ -21,6 +21,8 @@
 				name="guess"
 				minlength="5"
 				maxlength="5"
+				pattern="[a-zA-Z]{5}"
+				title="Five-letter word"
 				required
 				autofocus
 			/>
@@ -69,6 +71,10 @@
 			@keyframes fadeIn {
 				0% {opacity:0;}
 				100% {opacity:1;}
+			}
+			
+			[type="text"] {
+				text-transform: uppercase;
 			}
 		</style>
 	</main>
