@@ -1,10 +1,8 @@
-//import {EdgeFunction} from 'netlify:edge';
 import {EleventyEdge} from 'eleventy:edge';
 import precompiledAppData from './_generated/eleventy-edge-app-data.js';
 import formatGuessesAsTable from '../../src/_11ty/table.js';
 import getTodaysSolution from './_solution/solution.js';
 
-// /** @type {EdgeFunction} */
 export default async (request, context) => {
 	try {
 		let edge = new EleventyEdge('edge', {

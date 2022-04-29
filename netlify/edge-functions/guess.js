@@ -8,7 +8,6 @@ export default async (request, context) => {
 	
 	// Clean up old guesses
 	const [today] = new Date().toISOString().split('T');
-	console.log({today, currentDate: context.cookies.get('currentDate')})
 	if (context.cookies.get('currentDate') !== today) {
 		context.cookies.delete('guesses');
 
@@ -27,7 +26,6 @@ export default async (request, context) => {
 		const postData = Object.fromEntries(body);
 		
 		if (postData.guess) {
-			console.log('platypus');
 			const guesses = (context.cookies.get('guesses') || '')
 				.split('|')
 				.filter(x => x.length > 0);
