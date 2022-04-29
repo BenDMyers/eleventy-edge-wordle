@@ -5,6 +5,13 @@ import formatGuessesAsTable from '../../src/_11ty/table.js';
 
 // /** @type {EdgeFunction} */
 export default async (request, context) => {
+	// Clean up old guesses
+	const [today] = new Date().toISOString().split('T');
+	if (context.cookies.get('currentDate') !== today) {
+		context.cookies.delete('guesses');
+		context.cookies.set('currentDate', today);
+	}
+
 	try {
 		let edge = new EleventyEdge('edge', {
 			request,
