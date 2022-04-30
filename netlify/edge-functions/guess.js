@@ -10,6 +10,7 @@ export default async (request, context) => {
 	const [today] = new Date().toISOString().split('T');
 	if (context.cookies.get('currentDate') !== today) {
 		context.cookies.delete('guesses');
+		context.cookies.delete('state');
 
 		context.cookies.set({
 			name: 'currentDate',
